@@ -35,10 +35,8 @@ const password = generate({
   readable: true
 });
 
-// Adding styles with chalk
 const styledPassword = chalk.bold.green(password);
 
 const messageBox = boxen(`Generated password:\n\n ${styledPassword}`, { padding: 1, borderColor: 'green', dimBorder: true });
 
-// console.log(messageBox);
 console.log(messageBox);
