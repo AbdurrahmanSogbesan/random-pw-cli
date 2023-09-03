@@ -13,11 +13,13 @@ program
   .addOption(new Option('-l, --length <length>', 'Length of the password').argParser(parseInt))
   .addOption(new Option('-c, --complexity <complexity>', 'Complexity level of the password').choices(['weak', 'medium', 'strong']).default('medium'))
   .version('1.0.0')
-  .parse(process.argv);
+  .parse();
 
 const options = program.opts();
 
-if (!options.length) {
+const { complexity, length } = options;
+
+if (!length) {
   program.help();
 }
 
@@ -27,10 +29,9 @@ const complexityMap = {
   strong: ['alphanumeric', '!@#$%^&*()_'],
 };
 
-const { complexity } = options;
 
 const password = generate({
-  length: options.length,
+  length: length,
   charset: complexityMap[complexity],
   readable: true
 });
